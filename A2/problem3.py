@@ -14,8 +14,8 @@ from generate import GENERATE
 import random
 
 
-vocab = open("/Users/noalassally/Documents/master /Jaar 2/NLP/A2_2024/brown_vocab_100.txt")
-output_filename = "/Users/noalassally/Documents/master /Jaar 2/NLP/A2_2024/bigram_probs.txt"
+vocab = open("C:/Users/lucap/Documents/GitHub/NLP/NLP/A2/brown_vocab_100.txt")
+output_filename = "bigram_probs.txt"
 
 
 #load the indices dictionary
@@ -26,7 +26,7 @@ for i, line in enumerate(vocab):
     word_index_dict[word] = i
     
 
-f = open("/Users/noalassally/Documents/master /Jaar 2/NLP/A2_2024/brown_100.txt")
+f = open("C:/Users/lucap/Documents/GitHub/NLP/NLP/A2/brown_100.txt")
 
 
 counts = np.zeros((len(word_index_dict), len(word_index_dict)), dtype=int) #TODO: initialize numpy 0s array
