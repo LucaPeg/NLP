@@ -74,3 +74,10 @@ with open('toy_corpus.txt', 'r') as corpus, open('smoothed_eval.txt', 'w') as ou
 
         # Write the perplexity to the output file
         output.write(f"{perplexity}\n")
+
+
+# QUESTION 7 ###################################
+with open('smoothed_sentences', 'w') as output:
+    for i in range(1,11):
+        gen_text = GENERATE(word_index_dict, probs, "bigram", 15, "the")
+        output.write(f"{gen_text}\n")

@@ -7,18 +7,12 @@ NLP A2: N-Gram Language Models
 
 DO NOT SHARE/DISTRIBUTE SOLUTIONS WITHOUT THE INSTRUCTOR'S PERMISSION
 """
-directory = 'C:/Users/lucap/Documents/GitHub/NLP/NLP/A2'
-os.chdir(directory)
 import numpy as np
 import os
+os.chdir('A2')
 from generate import GENERATE
 
-
-
-
-
-
-vocab = open('C:/Users/lucap/Documents/GitHub/NLP/NLP/A2/brown_vocab_100.txt')
+vocab = open('brown_vocab_100.txt')
 
 #load the indices dictionary
 word_index_dict = {}
@@ -72,11 +66,7 @@ print(f"Proportion single occurrence: {proportion_single_occurrence:.2f}")
 
 # QUESTION 6 ##########################################
 
-# load test corpus
-toy_corpus_file = os.path.join(directory, 'toy_corpus.txt')
-output_file = os.path.join(directory, 'unigram_eval.txt')
-
-with open(toy_corpus_file, 'r') as corpus, open(output_file, 'w') as output:
+with open('toy_corpus.txt', 'r') as corpus, open('unigram_eval.txt', 'w') as output:
     for line in corpus:
         words = line.strip().lower().split()
         sent_prob = 1 # initialize probability before looping the words
@@ -86,12 +76,11 @@ with open(toy_corpus_file, 'r') as corpus, open(output_file, 'w') as output:
             if word in word_index_dict:
                 word_prob = probabilities[word_index_dict[word]]
             else:
-                word_prob = 0  # or a small smoothing value if zero probability is not desired
+                word_prob = 0 
             sent_prob *= word_prob
 
-        output.write(f"{sent_prob}\n")
+        output.write(f"{sent_prob}\n") # Computing Pr just to check results
     
-        
         # Calculate perplexity
         perplexity = 1 / (pow(sent_prob, 1.0 / sent_len)) if sent_prob > 0 else float('inf')
         
@@ -101,3 +90,9 @@ with open(toy_corpus_file, 'r') as corpus, open(output_file, 'w') as output:
         # Optional: print each sentence's perplexity for verification
         print(f"Perplexity of the sentence: {perplexity}")
 
+# QUESTION 7 ###############################################
+
+with open('unigram_sentences', 'w') as output:
+    for i in range(1,11):
+        gen_text = GENERATE(word_index_dict, probabilities, "unigram", 15, "County")
+        output.write(f"{gen_text}\n")
